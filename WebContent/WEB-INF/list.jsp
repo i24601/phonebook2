@@ -40,15 +40,16 @@ List<PersonVo> pList = (List<PersonVo>)request.getAttribute("pList");
 				<td><%=vo.getCompany() %></td>
 			</tr>
 			<tr>
-				<td>수정</td>
-				<td>삭제</td>
+				<td><a href = "./pbc?action=updateForm&person_id=<%=vo.getPersonId()%>">수정</a></td>
+				<td><a href = "./pbc?action=delete&person_id=<%=vo.getPersonId()%>">삭제</a></td>
 			</tr>
 		</tbody>
 	</table>
 	<br>
 	<%} %>
 	<p>
-		<a>추가번호 등록</a>
+		<a href="/pb2/pbc?action=wform">추가번호 등록</a>
+
 	</p>
 </body>
 </html>

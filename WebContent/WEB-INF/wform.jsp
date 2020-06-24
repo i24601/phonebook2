@@ -20,5 +20,8 @@
 		회사 : <input type = "text" name="company" value=""><br>
 		<button type="submit">등록</button>
 	</form>
+	<p>
+		<a href="/pb2/pbc?action=list">리스트 바로가기</a>
+	</p>
 </body>
 </html>

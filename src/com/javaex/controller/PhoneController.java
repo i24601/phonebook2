@@ -3,7 +3,6 @@ package com.javaex.controller;
 import java.io.IOException;
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,6 +22,7 @@ public class PhoneController extends HttpServlet {
 		
 		String action = request.getParameter("action");
 		//action=list
+		System.out.println(action);
 		if("list".equals(action))
 		{
 			PhoneDao pDao = new PhoneDao();
@@ -36,7 +36,7 @@ public class PhoneController extends HttpServlet {
 //			rd.forward(request, response);
 		}
 		//action=delete
-		if("wform".equals(action)) 
+		if("wform".equals(action)||"".equals(action)) 
 		{
 			WebUtil.foword(request, response, "/WEB-INF/wform.jsp");
 //			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/wform.jsp");
@@ -55,6 +55,27 @@ public class PhoneController extends HttpServlet {
 			WebUtil.redeirect(request, response, "/pb2/pbc?action=list");
 			
 //			response.sendRedirect("/pb2/pbc?action=list");
+		}
+		
+		if("updateForm".equals(action)) {
+			WebUtil.foword(request, response, "/WEB-INF/updateForm.jsp");
+		}
+		if("update".equals(action)) {
+			request.setCharacterEncoding("UTF-8");
+			int person_id = Integer.parseInt(request.getParameter("person_id"));
+			String name = request.getParameter("name");
+			String hp = request.getParameter("hp");
+			String company = request.getParameter("company");
+			PersonVo pVo = new PersonVo(person_id, name, hp, company);
+			PhoneDao pDao = new PhoneDao();
+			pDao.personUpdate(pVo);
+			WebUtil.redeirect(request, response, "/pb2/pbc?action=list");
+		}
+		if("delete".equals(action)) {
+			int person_id = Integer.parseInt(request.getParameter("person_id"));
+			PhoneDao pDao = new PhoneDao();
+			pDao.personDelete(person_id);
+			WebUtil.redeirect(request, response, "/pb2/pbc?action=list");
 		}
 		
 	}
